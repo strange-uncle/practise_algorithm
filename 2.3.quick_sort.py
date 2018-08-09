@@ -39,11 +39,12 @@ def quick_sort(obj):
         return obj
     else:
         l2 = obj[0]
-        # 1.因为元素可能有重复的，所以不能漏掉了=的情况
-        # 2. obj[1:len_obj] 要用冒号才是切片，不能用逗号 [1, len_obj]
-        # 3. obj[1:len_obj] 的范围包含开始index但不包含结束的index，是 1 ~ len_obj -1, 所以定义的时候不能用[1:len_obj-1]。
+        # 坑1.因为元素可能有重复的，所以不能漏掉了=的情况
+        # 坑2. obj[1:len_obj] 要用冒号才是切片，不能用逗号 [1, len_obj]
+        # 坑3. obj[1:len_obj] 的范围包含开始index但不包含结束的index，是 1 ~ len_obj -1, 所以定义的时候不能用[1:len_obj-1]。
         l1 = [i for i in obj[1:len_obj] if i <= l2]
         l3 = [i for i in obj[1:len_obj] if i > l2]
+        # 坑4.list和int不能直接相加，要把l2转换成list类型:[l2]
         return quick_sort(l1) + [l2] + quick_sort(l3)
 
 
