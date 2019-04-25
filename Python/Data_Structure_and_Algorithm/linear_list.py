@@ -9,26 +9,25 @@ h.next = LNode(2)
 h.next.next = LNode(3)
 h.next.next.next = LNode(4)
 
-## 定义head，这时候元素的顺序是 1，2，3，4
-head = LNode(None)
-head.next = h
+## 定义head变量，它指向表里的第一个元素，这时候元素的顺序是 1，2，3，4
+head = h
 
 ## 1. 表首端的插入,完成以后这head的元素顺序是10，1，2，3，4
 n1 = LNode(10)
-n1.next = head.next
-head.next = n1
+n1.next = head
+head = n1
 
 ## 2. 插入到2和3中间，完成以后head的元素顺序就是10,1,2,11,3,4
 ## 定义pre就是插入位置的前一个元素
 n2 = LNode(11)
-pre = head.next.next.next
+pre = head.next.next
 n2.next = pre.next
 pre.next = n2
 
 
 ## 3. 删除中间元素，比如删除2,那么pre就是2前面的元素
 ## 删除完毕以后，元素顺序是10,1,11,3,4
-pre = head.next.next
+pre = head.next
 pre.next = pre.next.next
 
 
@@ -39,7 +38,7 @@ while p is not None and i > 0:
 	i -= 1
 	p = p.next
 	if i == 0:
-		print(p.elem)
+		print("index = 3, value = ", p.elem)
 
 
 class LinkedListUnderflow(ValueError):
@@ -52,8 +51,6 @@ class LList:
 
 	def is_empty(self):
 		return self._head is None
-
-
 
 
 
