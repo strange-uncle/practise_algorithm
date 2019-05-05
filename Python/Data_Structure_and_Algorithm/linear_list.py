@@ -93,15 +93,79 @@ class LList:
 			q = q.next
 		return s
 
+	def print_all(self):
+		p = self._head
+		while p is not None:
+			print(p.elem, end='')
+			if p.next is not None:
+				print(',', end='')
+			p = p.next
+		print('')
+	# 生成器函数
+	def elements(self):
+		p = self._head
+		while p is not None:
+			yield p.elem
+			p = p.next
+
+
 l = LList()
-for i in range(2):
+for i in range(6):
 	l.prepend(i)
 
 # l.append(666)
-print("before pop_last:",l)
-print(l.pop_last())
-print(l.pop_last())
-print("after pop_last:",l)
+# print("before pop_last:",l)
+# print(l.pop_last())
+# print(l.pop_last())
+# print("after pop_last:",l)
+
+l.print_all()
+
+for i in l.elements():
+	print('i is ',i)
+
+class LList_rear(LList):
+	def __init__(self):
+		LList.__init__(self)
+		self._rear = None
+
+	def prepend(self, elem):
+		if self._head is None:
+			self._head = LNode(elem, None)
+			self._rear = self._head
+		else:
+			self._head = LNode(elem, None)
+
+	def append(self, elem):
+		if self._head is None:
+			self._head = LNode(elem, None)
+			self._rear = self._head
+		else:
+			self._rear.next = LNode(elem, None)
+			self._rear = self._rear.next
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
