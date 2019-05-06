@@ -45,7 +45,7 @@ class LinkedListUnderflow(ValueError):
 	pass
 
 
-class LList:
+class LList():
 	def __init__(self):
 		self._head = None
 
@@ -108,21 +108,15 @@ class LList:
 			yield p.elem
 			p = p.next
 
+	def reverse(self):
+		prev_node = None
+		while self._head is not None:
+			h = self._head
+			self._head = h.next
+			h.next = prev_node
+			prev_node = h
+		self._head = prev_node
 
-l = LList()
-for i in range(6):
-	l.prepend(i)
-
-# l.append(666)
-# print("before pop_last:",l)
-# print(l.pop_last())
-# print(l.pop_last())
-# print("after pop_last:",l)
-
-l.print_all()
-
-for i in l.elements():
-	print('i is ',i)
 
 class LList_rear(LList):
 	def __init__(self):
@@ -144,7 +138,20 @@ class LList_rear(LList):
 			self._rear.next = LNode(elem, None)
 			self._rear = self._rear.next
 
+if __name__ == "__main__":
+	l = LList()
+	for i in range(10):
+		l.prepend(i)
 
+	# l.append(666)
+	# print("before pop_last:",l)
+	# print(l.pop_last())
+	# print(l.pop_last())
+	# print("after pop_last:",l)
+
+	l.print_all()
+	l.reverse()
+	l.print_all()
 
 
 
