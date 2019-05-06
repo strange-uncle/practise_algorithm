@@ -38,16 +38,17 @@ class CSLList():
                 break
             h = h.next
 
-cl = CSLList()
-cl.prepend(1)
-cl.prepend(2)
-cl.prepend(3)
-cl.prepend(4)
-cl.prepend(5)
-cl.append(6)
-cl.append(7)
+if __name__ == "__main__":
+    cl = CSLList()
+    cl.prepend(1)
+    cl.prepend(2)
+    cl.prepend(3)
+    cl.prepend(4)
+    cl.prepend(5)
+    cl.append(6)
+    cl.append(7)
 
-cl.printall()
+    cl.printall()
 
 
 
