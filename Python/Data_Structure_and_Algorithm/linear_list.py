@@ -1,4 +1,5 @@
 # coding=UTF-8
+import random
 class LNode():
 	def __init__(self, elem, next_ = None):
 		self.elem = elem
@@ -117,6 +118,23 @@ class LList():
 			prev_node = h
 		self._head = prev_node
 
+	def sort(self):
+		if self._head is None:
+			return
+		crt = self._head.next
+		while crt is not None:
+			v = crt.elem
+			h = self._head
+			while h is not crt and h.elem <= v:
+				h = h.next
+			while h is not crt:
+				temp = h.elem
+				h.elem = v
+				v = temp
+				h = h.next
+			crt.elem = v
+			crt = crt.next
+
 
 class LList_rear(LList):
 	def __init__(self):
@@ -138,6 +156,7 @@ class LList_rear(LList):
 			self._rear.next = LNode(elem, None)
 			self._rear = self._rear.next
 
+
 if __name__ == "__main__":
 	l = LList()
 	for i in range(10):
@@ -153,11 +172,15 @@ if __name__ == "__main__":
 	l.reverse()
 	l.print_all()
 
+	print("single linked list before sort:", end="\n")
+	l2 = LList()
+	for i in range(1,10):
+		l2.prepend(random.randint(1,i*100))
+	l2.print_all()
 
-
-
-
-
+	print("single linked list after sort:", end="\n")
+	l2.sort()
+	l2.print_all()
 
 
 
