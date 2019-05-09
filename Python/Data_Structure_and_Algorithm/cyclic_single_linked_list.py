@@ -3,6 +3,7 @@ class LNode():
         self.elem = elem
         self.next = next_
 
+# 循环单链表
 # 这个模型里统一判断条件
 # self._rear指向尾节点
 # self._rear.next则指向head节点，并没有专门定义一个head
@@ -28,6 +29,16 @@ class CSLList():
         self.prepend(elem)
         self._rear = self._rear.next
 
+    def pop(self):
+        if self._rear is None:
+            raise ValueError("rear is none")
+        h = self._rear.next
+        if self._rear is h:
+            self._rear = None
+        else:
+            self._rear.next = h.next
+        return h.elem
+    
     def printall(self):
         if self.is_empty():
             return
@@ -47,8 +58,15 @@ if __name__ == "__main__":
     cl.prepend(5)
     cl.append(6)
     cl.append(7)
-
     cl.printall()
+    print(cl.pop())
+    print(cl.pop())
+    print(cl.pop())
+    print(cl.pop())
+    print(cl.pop())
+    print(cl.pop())
+    print(cl.pop())
+
 
 
 
