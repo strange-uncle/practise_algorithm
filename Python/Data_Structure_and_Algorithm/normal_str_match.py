@@ -1,7 +1,7 @@
 # coding=utf-8
 
 # the very basic str match algorithm
-def str_match(t: str, p: str):
+def str_first_match(t: str, p: str):
 	for i in range(len(t)):
 		idx = 0
 		while tar[i] == p[idx]:
@@ -15,7 +15,7 @@ def str_match(t: str, p: str):
 if __name__ == "__main__":
 	tar = "0123456789"
 	p = "678"
-	str_match(tar, p)
+	str_first_match(tar, p)
 
 	p = "6780"
-	str_match(tar, p)
+	str_first_match(tar, p)
