@@ -123,6 +123,41 @@ def suffix_exp_calculator(txt: 'str'):
         return st.pop()
     raise SyntaxError("Process incomplete.")
 
+
+def covert_infix_to_suffix(txt: 'str') -> 'str':
+    """
+    ( 3 - 5 ) * ( 6 * 17 - 4 ) / 3  and result is:  3 5 - 6 17 * 4 - * 3 /
+    ( 3 - 5 ) * ( 6 + 17 / 4 ) / 3  and result is:  3 5 - 6 17 4 / + * 3 /
+
+    :param txt:( 3 - 5 ) * ( 6 * 17 - 4 ) / 3
+    :return:3 5 - 6 17 * 4 - * 3 /
+    """
+    exp = []
+    st = ESStack()
+    op_list = ['+','-','*','/','(',')']
+    priority = {"(": "1", "+": "2", "-": "2", "*": "3", "/": "3"}
+    for i in txt.split():
+        if i not in op_list:
+            exp.append(i)
+        elif i == '(':
+            st.push(i)
+        elif i == ')':
+            while st.top() != '(':
+                exp.append(st.pop())
+            # discard the last '('
+            st.pop()
+        else:
+            # ( 3 - 5 ) * ( 6 * 17 - 4 * 3 * 2 * 1 - 1 ) / 3
+            # 3 5 - 6 17 * 4 3 2 1 * * * 1 - * 3 /
+            while not st.is_empty() and priority[st.top()] >= priority[i]:
+                exp.append(st.pop())
+            st.push(i)
+    
+    while not st.is_empty():
+        exp.append(st.pop())
+        
+    return ' '.join(exp)
+
 if __name__ == "__main__":
     # s = SStack()
     # s.push(1)
@@ -157,10 +192,23 @@ if __name__ == "__main__":
     # for i in ls2:
     #     print(i)
 
-    validate_parenthesis("}[)()(a{}}]dsf4)5")
+    #validate_parenthesis("}[)()(a{}}]dsf4)5")
 
-    txt = '1 2 / 5 *'
-    a = suffix_exp_calculator(txt)
+    # txt = '1 2 + 2 3 * 1 - /'
+    # txt = '( 3 - 5 ) * ( 6 + 17 / 4 ) - 3'
+    # txt = '( 3 - 5 ) / ( 6 + 3 * 4 ) - 3'
+    txt = '( 3 - 5 ) * ( 6 * 17 - 4 * 3 * 2 * 1 - 1 ) / 3'
+    #a = suffix_exp_calculator(txt)
+    #print("calculate: '", txt, "' and the result is: ", a)
+
+    # param txt: txt:(1 + 2) / (2 * 3 - 1)
+    # return: 1 2 + 2 3 * 1 - /
+    print("trans_infix_suffix is: ", txt, " and result is: ", covert_infix_to_suffix(txt))
+
+    #( 3 - 5 ) * ( 6 * 17 - 4 ) / 3  and result is:  3 5 - 6 17 * 4 - * 3 /
+    #( 3 - 5 ) * ( 6 + 17 / 4 ) / 3  and result is:  3 5 - 6 17 4 / + * 3 /
+    a = suffix_exp_calculator(covert_infix_to_suffix(txt))
     print("calculate: '", txt, "' and the result is: ", a)
 
-    
+    # ( 3 - 5 ) * ( 6 * 17 - 4 * 3 * 2 * 1 - 1 ) / 3
+    # 3 5 - 6 17 * 4 3 * 2 * 1 * - 1 - * 3 /
