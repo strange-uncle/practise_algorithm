@@ -1,4 +1,6 @@
 # coding=utf-8
+import sys
+sys.setrecursionlimit(9999999)
 
 class StackUnderFlow(ValueError):
     pass
@@ -193,6 +195,25 @@ def covert_infix_to_suffix_2(txt: 'str') -> 'str':
         exp.append(st.pop())
     return ' '.join(exp)
 
+# even though I set sys.setrecursionlimit(9999999),
+# this fun will still throw error if n is big (like 4000?)
+def recursion_factorial(n: 'int'):
+    if n == 0:
+        return 1
+    else:
+        return n * recursion_factorial(n-1)
+
+# expand recursion into flat, now this function works much better, can support 60000 very fast.
+def stack_factorial(n: 'int'):
+    st = SStack()
+    v = 1
+    for i in range(1, n+1):
+        st.push(i)
+    while not st.is_empty():
+        v *= st.pop()
+    return v
+    
+
 
 if __name__ == "__main__":
     # s = SStack()
@@ -246,7 +267,8 @@ if __name__ == "__main__":
     # a = suffix_exp_calculator(covert_infix_to_suffix(txt))
     # print("calculate: '", txt, "' and the result is: ", a)
 
-    # ( 3 - 5 ) * ( 6 * 17 - 4 * 3 * 2 * 1 - 1 ) / 3
-    # 3 5 - 6 17 * 4 3 * 2 * 1 * - 1 - * 3 /
+    v = 60000
+    # print(recursion_factorial(v))
+    print(stack_factorial(v))
     
     
