@@ -212,10 +212,50 @@ def stack_factorial(n: 'int'):
     while not st.is_empty():
         v *= st.pop()
     return v
-    
 
+# 最简单的背包问题：
+# 给定n个有编号的石头，每个石头有重量，分别是w0 ,w1 ... w(n-1)
+# 给定一个总的重量Weight，问：
+# 能否从这堆石头里选出若干个石头使得选中的石头总重量恰好等于给定一个总的重量Weight?
+# 只需要判断True or False就行
+def check_package(total_weight: 'int', weight_list: 'list', n: 'int'):
+    """
+    用递归的思路来解决。
+    分为两个情况：
+    1. 不选择最后一个石头，那么w(n-1)的重量就不会计入total_weight.
+    一旦check_package(total_weight, weight_list, n - 1)有解，那么这个解就是
+    check_package(total_weight, weight_list, n)的解。
+    也就是check_package(total_weight, weight_list, n)有解。
+    
+    2. 选择最后一个石头，那么w(n-1)的重量就会计入total_weight.
+    一旦check_package(total_weight - w(n-1), weight_list, n - 1)有解，那么这个解再加上选择的最后一个石头就是
+    check_package(total_weight, weight_list, n)的解。
+    也就是check_package(total_weight, weight_list, n)有解。
+    
+    :param total_weight: 10
+    :param weight_list: [1,2,3,4,5,6,7,8]
+    :param n: 8
+    :return: True
+    """
+    if total_weight == 0:
+        return True
+    elif total_weight < 0:
+        return False
+    elif total_weight > 0 and n < 1:
+        return False
+    if check_package(total_weight, weight_list, n - 1):
+        return True
+    if check_package(total_weight - weight_list[n-1], weight_list, n - 1):
+        return True
+    return False
 
 if __name__ == "__main__":
+    if check_package(4, [2,3,5,6,7,8], 6):
+        print("Has answer.")
+    else:
+        print("No answer.")
+    
+    
     # s = SStack()
     # s.push(1)
     # s.push(2)
