@@ -1,4 +1,4 @@
-'''
+"""
 简单选择排序 simple selection sort
 
 是从第一个元素开始生成有序列表,和冒泡的方向是相反的.
@@ -25,7 +25,7 @@
 
 一直这样处理下去,直到temp = len(obj) - 1 就不处理了.
 
-'''
+"""
 
 
 def simple_selection_sort(obj):

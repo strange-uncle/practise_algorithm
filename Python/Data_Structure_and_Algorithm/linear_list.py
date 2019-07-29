@@ -135,6 +135,28 @@ class LList():
 			crt.elem = v
 			crt = crt.next
 
+	#this function is hard to understand, need more thinking.
+	def sort_hard(self):
+		p = self._head
+		if p is None or p.next is None:
+			return
+
+		rem = p.next
+		p.next = None
+		while rem is not None:
+			p = self._head
+			q = None
+			while p is not None and p.elem <= rem.elem:
+				q = p
+				p = p.next
+			if q is None:
+				self._head = rem
+			else:
+				q.next = rem
+			q = rem
+			rem = rem.next
+			q.next = p
+
 
 class LList_rear(LList):
 	def __init__(self):
@@ -173,15 +195,21 @@ if __name__ == "__main__":
 	l.print_all()
 
 	print("single linked list before sort:", end="\n")
-	l2 = LList()
-	for i in range(1,10):
-		l2.prepend(random.randint(1,i*100))
-	l2.print_all()
+	# l2 = LList()
+	# for i in range(1,10):
+	# 	l2.prepend(random.randint(1,i*100))
+	# l2.print_all()
+	#
+	# l2.append(2)
+	# l2.append(3)
+	# l2.append(1)
+	# l2.append(4)
 
-	print("single linked list after sort:", end="\n")
-	l2.sort()
-	l2.print_all()
-
+	# print("after sort:", end="\n")
+	# l2.sort()
+	# l2.sort_hard()
+	# l2.print_all()
+	#
 
 
 
