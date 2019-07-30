@@ -1,6 +1,9 @@
 import queue
 
 """
+用栈(LIFO)的方式是属于 DFS(Depth-first-search) 深度优先搜索.
+始终优先考虑最迟进入缓存的情况，即一条路走到黑，没路了就返回最近的分支.
+
 . 是最终走过的路， - 是走过但被证明是错误的路。
 Done.
  x  x  x  x  x  x  x  x  x  x  x  x  x
