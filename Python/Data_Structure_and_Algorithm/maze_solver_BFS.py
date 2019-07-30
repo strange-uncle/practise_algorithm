@@ -1,6 +1,12 @@
 import queue
 import pprint
+import os
+from time import sleep
+
+
 """
+使用CMD来运行可以看到更好的效果，具体命令参数参见Run Output window.
+
 用队列(FIFO)的方式实现的是 广度优先搜索 BFS(Breadth-first-search).
 始终优先考虑最早进入缓存的情况, 是齐头并进的搜索。
 
@@ -10,7 +16,9 @@ import pprint
 def mark(mz: list, pos):
     mz[pos[0]][pos[1]] = 2
     # print('-----------------------------------------------')
-    # pretty_print_maze(mz)
+    os.system('cls')
+    pretty_print_maze(mz)
+    sleep(0.3)
 
 
 def passable(mz: list, pos):
@@ -44,9 +52,9 @@ def pretty_print_maze(mz: list):
     for row in range(len(mz)):
         for column in range(len(mz[0])):
             if start_pos == (row, column):
-                print(' s ', end='')
+                print(' S ', end='')
             elif end_pos == (row, column):
-                print(' e ', end='')
+                print(' E ', end='')
             elif mz[row][column] == 1:
                 print(' x ', end='')
             elif mz[row][column] == 0:

@@ -1,6 +1,9 @@
 import queue
+import os
+
 
 """
+
 用栈(LIFO)的方式是属于 DFS(Depth-first-search) 深度优先搜索.
 始终优先考虑最迟进入缓存的情况，即一条路走到黑，没路了就返回最近的分支.
 
@@ -38,9 +41,9 @@ def pretty_print_maze(mz: list, st: queue.LifoQueue):
     for row in range(len(mz)):
         for column in range(len(mz[0])):
             if start_pos == (row, column):
-                print(' s ', end='')
+                print(' S ', end='')
             elif end_pos == (row, column):
-                print(' e ', end='')
+                print(' E ', end='')
             elif mz[row][column] == 1:
                 print(' x ', end='')
             elif (row, column) in lst_history:
@@ -99,4 +102,4 @@ if __name__ == '__main__':
     start_pos = (1, 1)
     end_pos = (11, 9)
     maze_solver_backtracking(maze, start_pos, end_pos)
-    pretty_print_maze(maze, st_pos_backtracking)
+    # pretty_print_maze(maze, st_pos_backtracking)

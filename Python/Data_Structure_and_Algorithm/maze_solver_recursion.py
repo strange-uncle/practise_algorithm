@@ -1,6 +1,11 @@
 import pprint
+import os
+from time import sleep
+
 
 """
+使用CMD来运行可以看到更好的效果，具体命令参数参见Run Output window.
+
 用递归的方式是属于 DFS (Depth-first-search) 深度优先搜索.
 
 注意，下面三个步骤演示了递归之美：如果某个方向没路了，递归调用栈会依次回退到以前的可用状态。
@@ -61,8 +66,9 @@ x  x  x  x  x  x  x  x  x  x  x  x  x
 
 def mark(mz: list, pos):
     mz[pos[0]][pos[1]] = 2
+    os.system('cls')
     pretty_print_maze(mz)
-    print('----------------------------------------')
+    sleep(0.5)
 
 
 def passable(mz: list, pos):
@@ -91,9 +97,9 @@ def pretty_print_maze(mz: list):
     for row in range(len(mz)):
         for column in range(len(mz[0])):
             if start_pos == (row, column):
-                print(' s ', end='')
+                print(' S ', end='')
             elif end_pos == (row, column):
-                print(' e ', end='')
+                print(' E ', end='')
             elif mz[row][column] == 1:
                 print(' x ', end='')
             elif mz[row][column] == 0:
